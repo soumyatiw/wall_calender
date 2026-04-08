@@ -1,0 +1,77 @@
+/* ============================================================
+   globals.css — global reset & CSS custom properties
+   ============================================================ */
+
+/* ── Custom Properties ────────────────────────────────────── */
+:root {
+  /* Brand colours */
+  --cal-blue:       #1a73e8;
+  --cal-blue-light: #e8f0fe;
+  --cal-red:        #d93025;
+
+  /* Gray scale */
+  --cal-gray-100: #f8f9fa;
+  --cal-gray-200: #f1f3f4;
+  --cal-gray-300: #e8eaed;
+  --cal-gray-400: #dadce0;
+  --cal-gray-500: #bdc1c6;
+  --cal-gray-600: #80868b;
+  --cal-gray-700: #5f6368;
+  --cal-gray-800: #3c4043;
+  --cal-gray-900: #202124;
+
+  /* Shape & elevation */
+  --cal-radius: 12px;
+  --cal-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+  /* Typography */
+  --cal-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+              Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* ── Box-sizing reset ─────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Body baseline ────────────────────────────────────────── */
+body {
+  font-family: var(--cal-font);
+  background: linear-gradient(135deg, #e8edf5 0%, #f1f3f8 50%, #e8f0fe 100%);
+  min-height: 100vh;
+  color: var(--cal-gray-900);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Element baselines ────────────────────────────────────── */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
