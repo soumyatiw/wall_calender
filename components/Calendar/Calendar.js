@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Calendar.css";
-import HeroImage from "./HeroImage";
+import HeroImage, { getMonthTheme } from "./HeroImage";
 import Notes from "./Notes";
 import CalendarHeader from "./CalendarHeader";
 import CalendarGrid from "./CalendarGrid";
@@ -20,10 +20,15 @@ export default function Calendar({
   setHoveredDate,
 }) {
   const [flipKey, setFlipKey] = useState(0);
+  const themeColor = getMonthTheme(currentMonth);
+
   return (
     <main className="cal-page">
-      <div className="cal-card flipping" key={flipKey}>
-        {/* Spiral binding bar */}
+      <div 
+        className="cal-card flipping" 
+        key={flipKey}
+        style={{ '--theme-color': themeColor }}
+      >
         <div className="spiral-bar">
           {Array.from({ length: 28 }).map((_, i) => (
             <div key={i} className="spiral-coil"></div>

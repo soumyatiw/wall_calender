@@ -153,14 +153,14 @@
   border: none;
   cursor: pointer;
   font-size: 20px;
-  color: #1a8fe8;
+  color: var(--theme-color);
   padding: 2px 8px;
   border-radius: 4px;
   transition: background 0.15s;
 }
 
 .nav-btn:hover {
-  background: #e3f1fd;
+  background: color-mix(in srgb, var(--theme-color) 12%, white);
 }
 
 .nav-title {
@@ -233,7 +233,7 @@
 }
 
 .day-name.weekend {
-  color: #1a8fe8;
+  color: var(--theme-color);
 }
 
 .cal-grid {
@@ -265,25 +265,25 @@
 }
 
 .cal-day.weekend {
-  color: #1a8fe8;
+  color: var(--theme-color);
 }
 
 .cal-day.today {
-  border: 1.5px solid #1a8fe8;
+  border: 1.5px solid var(--theme-color);
   font-weight: 600;
 }
 
 .cal-day.selected-start,
 .cal-day.selected-end {
-  background: #1a8fe8;
+  background: var(--theme-color);
   color: #fff;
   font-weight: 600;
   border-radius: 50%;
 }
 
 .cal-day.in-range {
-  background: #e3f1fd;
-  color: #1a8fe8;
+  background: color-mix(in srgb, var(--theme-color) 12%, white);
+  color: var(--theme-color);
   border-radius: 0;
 }
 

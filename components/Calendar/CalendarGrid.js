@@ -19,10 +19,7 @@ function isBetween(date, start, end) {
   return t > start.getTime() && t < end.getTime();
 }
 
-/**
- * Builds a 42-cell (6-week) array of Date objects for the given month.
- * Cells before the 1st and after the last day are filled from adjacent months.
- */
+
 function getCalendarDays(year, month) {
   const firstDay = new Date(year, month, 1);
   const startOffset = firstDay.getDay(); // 0 (Sun) – 6 (Sat)
@@ -49,7 +46,6 @@ function getCalendarDays(year, month) {
   return days;
 }
 
-/* ── Component ───────────────────────────────────────────── */
 
 export default function CalendarGrid({
   currentMonth,
@@ -79,7 +75,7 @@ export default function CalendarGrid({
       ? selectedStart
       : rangeEnd;
 
-  /* ── Click handler ───────────────────────────────────────── */
+
   function handleDayClick(date) {
     if (!selectedStart || (selectedStart && selectedEnd)) {
       // No start yet, or both already picked → reset and pick new start
@@ -97,7 +93,6 @@ export default function CalendarGrid({
     }
   }
 
-  /* ── Class builder ───────────────────────────────────────── */
   function getDayClasses(date) {
     const classes = ["cal-day"];
 
@@ -113,7 +108,6 @@ export default function CalendarGrid({
     return classes.join(" ");
   }
 
-  /* ── Render ──────────────────────────────────────────────── */
   return (
     <div className="grid-col">
       {/* Day-name header row */}
