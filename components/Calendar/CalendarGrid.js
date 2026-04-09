@@ -7,8 +7,8 @@ function isSameDay(a, b) {
   if (!a || !b) return false;
   return (
     a.getFullYear() === b.getFullYear() &&
-    a.getMonth()    === b.getMonth()    &&
-    a.getDate()     === b.getDate()
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
   );
 }
 
@@ -61,10 +61,10 @@ export default function CalendarGrid({
   hoveredDate,
   setHoveredDate,
 }) {
-  const year  = currentYear;
+  const year = currentYear;
   const month = currentMonth;
   const today = new Date();
-  const days  = getCalendarDays(year, month);
+  const days = getCalendarDays(year, month);
 
   /* Determine the effective range end (hover preview when end not yet set) */
   const rangeEnd = selectedEnd ?? (selectedStart ? hoveredDate : null);
@@ -99,48 +99,52 @@ export default function CalendarGrid({
 
   /* ── Class builder ───────────────────────────────────────── */
   function getDayClasses(date) {
-    const classes = ["cal-grid__day"];
+    const classes = ["cal-day"];
 
-    if (isSameDay(date, today))          classes.push("is-today");
-    if (isSameDay(date, selectedStart))  classes.push("is-selected-start");
-    if (isSameDay(date, selectedEnd))    classes.push("is-selected-end");
-    if (isBetween(date, rangeStart, rangeEndNorm)) classes.push("is-in-range");
-    if (date.getMonth() !== month)       classes.push("is-other-month");
+    if (isSameDay(date, today)) classes.push("today");
+    if (isSameDay(date, selectedStart)) classes.push("selected-start");
+    if (isSameDay(date, selectedEnd)) classes.push("selected-end");
+    if (isBetween(date, rangeStart, rangeEndNorm)) classes.push("in-range");
+    if (date.getMonth() !== month) classes.push("other-month");
 
     const dow = date.getDay();
-    if (dow === 0 || dow === 6)          classes.push("is-weekend");
+    if (dow === 0 || dow === 6) classes.push("weekend");
 
     return classes.join(" ");
   }
 
   /* ── Render ──────────────────────────────────────────────── */
   return (
-    <div
-      className="cal-grid"
-      onMouseLeave={() => setHoveredDate(null)}
-    >
+    <div className="grid-col">
       {/* Day-name header row */}
-      {DAY_NAMES.map((name) => (
-        <div key={name} className="cal-grid__day-name">
-          {name}
-        </div>
-      ))}
+      <div className="day-names">
+        {DAY_NAMES.map((name, i) => (
+          <div key={name} className={`day-name ${i === 0 || i === 6 ? 'weekend' : ''}`}>
+            {name}
+          </div>
+        ))}
+      </div>
 
-      {/* 42 day cells */}
-      {days.map((date, idx) => (
-        <button
-          key={idx}
-          className={getDayClasses(date)}
-          onClick={() => handleDayClick(date)}
-          onMouseEnter={() => setHoveredDate(date)}
-          aria-label={date.toDateString()}
-          aria-pressed={
-            isSameDay(date, selectedStart) || isSameDay(date, selectedEnd)
-          }
-        >
-          {date.getDate()}
-        </button>
-      ))}
+      <div
+        className="cal-grid"
+        onMouseLeave={() => setHoveredDate(null)}
+      >
+        {/* 42 day cells */}
+        {days.map((date, idx) => (
+          <button
+            key={idx}
+            className={getDayClasses(date)}
+            onClick={() => handleDayClick(date)}
+            onMouseEnter={() => setHoveredDate(date)}
+            aria-label={date.toDateString()}
+            aria-pressed={
+              isSameDay(date, selectedStart) || isSameDay(date, selectedEnd)
+            }
+          >
+            {date.getDate()}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

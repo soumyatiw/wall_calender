@@ -6,7 +6,7 @@ function formatDate(date) {
 }
 
 export default function Notes({ notes, setNotes, selectedStart, selectedEnd }) {
-  const count     = notes.length;
+  const count = notes.length;
   const nearLimit = count >= MAX_CHARS * 0.8; // warn at 80 %
 
   /* Build the date-range subheading */
@@ -18,29 +18,20 @@ export default function Notes({ notes, setNotes, selectedStart, selectedEnd }) {
   }
 
   return (
-    <div className="cal-notes">
-      {/* Heading */}
-      <div className="cal-notes__header">
-        <h3 className="cal-notes__title">Notes</h3>
-        {rangeLabel && (
-          <span className="cal-notes__range">{rangeLabel}</span>
-        )}
-      </div>
-
-      {/* Textarea */}
+    <div className="notes-col">
+      <div className="notes-label">Notes {rangeLabel && `(${rangeLabel})`}</div>
+      <div className="notes-line" />
+      <div className="notes-line" />
+      <div className="notes-line" />
       <textarea
-        className="cal-notes__textarea"
+        className="notes-textarea"
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
         maxLength={MAX_CHARS}
-        placeholder="Add notes for this period…"
+        placeholder="Write your notes here..."
         aria-label="Calendar notes"
+        rows={8}
       />
-
-      {/* Character counter */}
-      <p className={`cal-notes__counter${nearLimit ? " is-near-limit" : ""}`}>
-        {count} / {MAX_CHARS}
-      </p>
     </div>
   );
 }

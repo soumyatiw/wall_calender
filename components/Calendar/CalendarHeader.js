@@ -18,26 +18,26 @@ export default function CalendarHeader({ currentDate, setCurrentDate, setFlipKey
   }
 
   return (
-    <header className="cal-header">
+    <div className="nav-row">
       <button
-        className="cal-header__nav-btn"
+        className="nav-btn"
         onClick={goToPrevMonth}
         aria-label="Previous month"
       >
         &#8249;
       </button>
 
-      <h2 className="cal-header__title">
+      <h2 className="nav-title">
         {MONTH_NAMES[month]} {year}
       </h2>
 
       <button
-        className="cal-header__nav-btn"
+        className="nav-btn"
         onClick={goToNextMonth}
         aria-label="Next month"
       >
         &#8250;
       </button>
-    </header>
+    </div>
   );
 }

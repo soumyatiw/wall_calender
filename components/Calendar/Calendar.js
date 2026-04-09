@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./Calendar.css";
-import HeroImage      from "./HeroImage";
-import Notes          from "./Notes";
+import HeroImage from "./HeroImage";
+import Notes from "./Notes";
 import CalendarHeader from "./CalendarHeader";
-import CalendarGrid   from "./CalendarGrid";
+import CalendarGrid from "./CalendarGrid";
 
 export default function Calendar({
   currentDate,
@@ -21,23 +21,20 @@ export default function Calendar({
 }) {
   const [flipKey, setFlipKey] = useState(0);
   return (
-    <main className="cal-shell">
-      {/* Left panel — hero image + notes */}
-      <aside className="cal-panel cal-panel--left">
+    <main className="cal-page">
+      <div className="cal-card flipping" key={flipKey}>
+        {/* Spiral binding bar */}
+        <div className="spiral-bar">
+          {Array.from({ length: 28 }).map((_, i) => (
+            <div key={i} className="spiral-coil"></div>
+          ))}
+        </div>
+
         <HeroImage
           currentMonth={currentMonth}
           currentYear={currentYear}
         />
-        <Notes
-          notes={notes}
-          setNotes={setNotes}
-          selectedStart={selectedStart}
-          selectedEnd={selectedEnd}
-        />
-      </aside>
 
-      {/* Right panel — header (nav) + date grid */}
-      <section className="cal-panel cal-panel--right">
         <CalendarHeader
           currentDate={currentDate}
           setCurrentDate={setCurrentDate}
@@ -45,18 +42,26 @@ export default function Calendar({
           currentYear={currentYear}
           setFlipKey={setFlipKey}
         />
-        <CalendarGrid
-          key={flipKey}
-          currentMonth={currentMonth}
-          currentYear={currentYear}
-          selectedStart={selectedStart}
-          setSelectedStart={setSelectedStart}
-          selectedEnd={selectedEnd}
-          setSelectedEnd={setSelectedEnd}
-          hoveredDate={hoveredDate}
-          setHoveredDate={setHoveredDate}
-        />
-      </section>
+
+        <div className="bottom-section">
+          <Notes
+            notes={notes}
+            setNotes={setNotes}
+            selectedStart={selectedStart}
+            selectedEnd={selectedEnd}
+          />
+          <CalendarGrid
+            currentMonth={currentMonth}
+            currentYear={currentYear}
+            selectedStart={selectedStart}
+            setSelectedStart={setSelectedStart}
+            selectedEnd={selectedEnd}
+            setSelectedEnd={setSelectedEnd}
+            hoveredDate={hoveredDate}
+            setHoveredDate={setHoveredDate}
+          />
+        </div>
+      </div>
     </main>
   );
 }
